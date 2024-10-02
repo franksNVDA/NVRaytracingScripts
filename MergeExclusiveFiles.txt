@@ -1,0 +1,13 @@
+DirectionalLightComponent.h
+PrimitiveComponent.h
+Scene.h
+RendererSettings.h
+LightComponent.h
+LightComponentBase.h
+Material.h
+MaterialInterface.h
+ParticleSystemComponent.h
+EngineBaseTypes.h
+MaterialShared.h
+MaterialShared.cpp
+LightComponent.cpp
