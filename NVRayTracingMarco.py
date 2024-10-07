@@ -13,8 +13,8 @@ CompareFolders = [#"Source/Runtime/Renderer",
                   #"Source/Runtime/D3D12RHI",
                   #"Source/Runtime/RHI",
                   #"Plugins/Experimental/GPULightmass",
-                  "Plugins/FX/Niagara/",
-                  #"Shaders"
+                  #"Plugins/FX/Niagara/",
+                  "Shaders"
                   ]
 ExcludeFolders = ["Shaders/Shared/ThirdParty"]
 ExcludeFiles = ["ACES.ush"]
@@ -136,11 +136,11 @@ def CompareFolderInternal(PathA, PathB, bCollectNVAddedFiles, OutputPath):
         if IsFile(PathA) and not IsFile(PathB):
             nvAddedFiles.append(FilePath(pathlib.Path(PathA).name, PathA, OutputPath))
             return
-        # if IsFolder(PathA) and not IsFolder(PathB) and PathB not in ExcludeFolders:
-        #     dirsA = os.listdir(PathA)
-        #     for dir in dirsA:
-        #         CompareFolderInternal(CreatePath(PathA, dir), CreatePath(PathB, dir), bCollectNVAddedFiles, CreatePath(OutputPath, dir))
-        #     return
+        if IsFolder(PathA) and not IsFolder(PathB) and PathB not in ExcludeFolders:
+            dirsA = os.listdir(PathA)
+            for dir in dirsA:
+                CompareFolderInternal(CreatePath(PathA, dir), CreatePath(PathB, dir), bCollectNVAddedFiles, CreatePath(OutputPath, dir))
+            return
 
 def CompareFolder(EnginePathA, EnginePathB, bCollectNVAddedFiles, OutputEnginePath):
     for folder in CompareFolders:
