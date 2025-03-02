@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import os
 import pathlib
+import shutil
 SVNPath = "D:/MmWork/UE5.1.1_DLSS4/Engine"
 GitPath = "D:/NV/UE5.1.1_DLSS4/Engine"
 
@@ -21,18 +22,18 @@ CompareFolders = [#"Config",
                   #"Plugins/Runtime/ProceduralMeshComponent",
                   #"Source/Editor/UnrealEd/Private",
                   #"Source/Runtime/AutomationMessages",
-                  "Source/Runtime/Core",
-                  "Source/Runtime/D3D12RHI",
+                  #"Source/Runtime/Core",
+                  #"Source/Runtime/D3D12RHI",
                   "Source/Runtime/Engine",
                   #"Source/Runtime/Experimental",
                   #"Source/Runtime/Landscape",
                   #"Source/Runtime/Launch",
-                  "Source/Runtime/RenderCore",
+                  #"Source/Runtime/RenderCore",
                   "Source/Runtime/Renderer",
-                  "Source/Runtime/RHI",
+                  #"Source/Runtime/RHI",
                   #"Source/Runtime/VulkanRHI",
-                  "Source/Runtime/Windows",
-                  "Source/ThirdParty/NVIDIA",
+                  #"Source/Runtime/Windows",
+                  #"Source/ThirdParty/NVIDIA",
                   #"Plugins/Runtime/Nvidia",
                   "Shaders"
                   ]
@@ -208,6 +209,9 @@ def MergeInternal(nvPath):
     mergeFile.close()
 
 def Merge():
+    if os.path.exists(MergeEnginePath):
+        shutil.rmtree(MergeEnginePath)
+
     exlusiveFilesData = []
     with open(MergeExclusiveFilesPath, 'r', encoding='utf-8') as exlusiveFiles:
         data = exlusiveFiles.readlines()
